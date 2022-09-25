@@ -83,6 +83,20 @@ app.post('/api/notes', (req, res) => {
     }
   });
 
+  app.delete('/api/notes/:id', (req, res) => {
+      const noteID = req.params.note_id;
+      console.log(notes);
+      for(let i = 0; i < notes.length; i++){
+          const note = notes[i];
+          console.log(notes[i])
+          if(notes.note_id === noteID){
+              const index = notes.findIndex;
+              notes.splice(index, 1);
+              fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(notes));
+          }
+      }
+  })
+
 
 
 
