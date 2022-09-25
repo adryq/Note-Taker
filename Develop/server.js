@@ -15,12 +15,18 @@ app.use(express.static('public'));
 
 //HTML route to return notes.html file
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/notes.html'))
+  res.sendFile(path.join(__dirname, './public/notes.html'))
 );
+
+  // API route to get all saved notes
+  app.get('/api/notes', (req, res) => {
+    res.json(notes)
+})
+
 
 //HTML route to return index.html file
 app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, './public/index.html'))
 );
 
 
@@ -43,7 +49,7 @@ app.post('/api/notes', (req, res) => {
       };
   
       // Obtain existing notes
-      fs.readFile('./db/db.json', 'utf8', (err, data) => {
+      fs.readFile('./db/db.json', 'utf8',(err, data) => {
         if (err) {
           console.error(err);
         } else {
@@ -76,7 +82,6 @@ app.post('/api/notes', (req, res) => {
       res.json('Error in posting note');
     }
   });
-
 
 
 
